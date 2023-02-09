@@ -20,7 +20,7 @@ public class Customer {
 
     @Id
     @Column(name = "customerNumber")
-    Integer customerNumber;
+    Long customerNumber;
 
     @Column(name = "customerName")
     String customerName;
