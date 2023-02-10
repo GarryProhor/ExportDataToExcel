@@ -147,11 +147,17 @@ public class ExcelUtils {
     }
     private static <T> String getCellValue(T data, CellConfig cellConfig, Class clazz){
         String fieldName = cellConfig.getFieldName();
-
         try {
             Field field = getDeclaredField(clazz, fieldName);
-        }catch (Exception e){
 
+            if(!ObjectUtils.isEmpty(field)){
+                field.setAccessible(true);
+                return !ObjectUtils.isEmpty(field.get(data)) ? field.get(data).toString() : "";
+            }
+            return "";
+        }catch (Exception e){
+            log.info("" + e);
+            return "";
         }
     }
     private static Field getDeclaredField(Class clazz, String fieldName){
