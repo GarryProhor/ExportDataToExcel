@@ -131,4 +131,17 @@ public class ExcelUtils {
             i++;
         }
     }
+
+    private static <T> void insertDataToCell(T data, Row currentRow, List<CellConfig> cellConfigs,
+                                             Class clazz, Sheet sheet, XSSFCellStyle dataStyle){
+        for(CellConfig cellConfig : cellConfigs){
+            Cell currentCell = currentRow.getCell(cellConfig.getColumnIndex());
+            if(ObjectUtils.isEmpty(currentCell)){
+                currentCell = currentRow.createCell(cellConfig.getColumnIndex());
+            }
+
+            //get data for cell
+            String cellValue = getCellValue(data, cellConfig, clazz);
+        }
+    }
 }
