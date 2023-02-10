@@ -14,6 +14,7 @@ import org.springframework.util.ResourceUtils;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.lang.reflect.Field;
 import java.util.List;
 
 import static exportdatatoexel.utils.FileFactory.PATH_TEMPLATE;
@@ -144,4 +145,14 @@ public class ExcelUtils {
             String cellValue = getCellValue(data, cellConfig, clazz);
         }
     }
+    private static <T> String getCellValue(T data, CellConfig cellConfig, Class clazz){
+        String fieldName = cellConfig.getFieldName();
+
+        try {
+            Field field = getDeclaredField(clazz, fieldName);
+        }catch (Exception e){
+
+        }
+    }
+
 }
