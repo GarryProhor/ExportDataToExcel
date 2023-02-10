@@ -12,7 +12,7 @@ import java.io.OutputStream;
 @Component
 public class FileFactory {
 
-    public static  final String PATH_TEMPLATE = "src/main/resources/templates";
+    public static  final String PATH_TEMPLATE = "C:\\Users\\igorp\\Desktop\\ExportDataToExel\\src\\main\\resources\\templates\\";
 
     public static File createFile(String fileName, Workbook workbook) throws Exception{
         workbook = new XSSFWorkbook();

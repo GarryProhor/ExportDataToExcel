@@ -40,5 +40,7 @@ public class ExportConfig {
         customerCellConfig.add(new CellConfig(10, "country"));
         customerCellConfig.add(new CellConfig(11, "salesRepEmployeeNumber"));
         customerCellConfig.add(new CellConfig(12, "creditLimit"));
+
+        customerExport.setCellExportConfigList(customerCellConfig);
     }
 }
