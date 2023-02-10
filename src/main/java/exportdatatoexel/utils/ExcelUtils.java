@@ -143,6 +143,11 @@ public class ExcelUtils {
 
             //get data for cell
             String cellValue = getCellValue(data, cellConfig, clazz);
+
+            //set data
+            currentCell.setCellValue(cellValue);
+            sheet.autoSizeColumn(cellConfig.getColumnIndex());
+            currentCell.setCellStyle(dataStyle);
         }
     }
     private static <T> String getCellValue(T data, CellConfig cellConfig, Class clazz){
