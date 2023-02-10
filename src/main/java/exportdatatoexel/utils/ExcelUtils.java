@@ -107,6 +107,8 @@ public class ExcelUtils {
             }
 
             // insert data to row
+            insertDataToCell(data, currentRow, cellConfigs, clazz, sheet, dataCellStyle);
+            currentRowIndex++;
         }
     }
     private static <T> void insertFieldNameAsTitleToWorkbook(List<CellConfig> cellConfigs,
