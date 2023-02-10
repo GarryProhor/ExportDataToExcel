@@ -2,10 +2,7 @@ package exportdatatoexel.utils;
 
 import exportdatatoexel.entity.Customer;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.poi.ss.usermodel.BorderStyle;
-import org.apache.poi.ss.usermodel.FillPatternType;
-import org.apache.poi.ss.usermodel.HorizontalAlignment;
-import org.apache.poi.ss.usermodel.IndexedColors;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -78,9 +75,39 @@ public class ExcelUtils {
         dataCellStyle.setWrapText(true);
 
         //insert fieldName as title to excel
-
+        insertFieldNameAsTitleToWorkbook(ExportConfig.customerExport.getCellExportConfigList(), newSheet, tittleCellStyle);
         //insert data of fieldName to excel
 
         //return
+    }
+
+    private static <T> void insertDataToWorkbook(Workbook workbook,
+                                                 ExportConfig exportConfig,
+                                                 List<T> datas,
+                                                 XSSFCellStyle dataCellStyle){
+
+    }
+    private static <T> void insertFieldNameAsTitleToWorkbook(List<CellConfig> cellConfigs,
+                                                             Sheet sheet,
+                                                             XSSFCellStyle titleCellStyle){
+        //title -> first row of excel -> get top row
+        int currentRow = sheet.getTopRow();
+
+        //create row
+        Row row = sheet.createRow(currentRow);
+        int i = 0;
+
+        //resize fix text in each cell
+        sheet.autoSizeColumn(currentRow);
+
+        //insert field name to cell
+        for(CellConfig cellConfig : cellConfigs){
+            Cell currentCell = row.createCell(i);
+            String fieldName = cellConfig.getFieldName();
+            currentCell.setCellValue(fieldName);
+            currentCell.setCellStyle(titleCellStyle);
+            sheet.autoSizeColumn(i);
+            i++;
+        }
     }
 }
