@@ -154,5 +154,19 @@ public class ExcelUtils {
 
         }
     }
+    private static Field getDeclaredField(Class clazz, String fieldName){
+        if(ObjectUtils.isEmpty(clazz) || ObjectUtils.isEmpty(fieldName)){
+            return  null;
+        }
+        do{
+            try {
+                Field field = clazz.getDeclaredField(fieldName);
+                field.setAccessible(true);
+            } catch (NoSuchFieldException e) {
+                ;log.info("" + e);
+            }
+        }while ((clazz = clazz.getSuperclass()) !=null);
+        return null;
+    }
 
 }
