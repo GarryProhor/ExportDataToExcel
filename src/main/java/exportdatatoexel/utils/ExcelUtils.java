@@ -8,6 +8,7 @@ import org.apache.poi.xssf.usermodel.XSSFFont;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.springframework.stereotype.Component;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.ResourceUtils;
 
 import java.io.ByteArrayInputStream;
@@ -86,6 +87,26 @@ public class ExcelUtils {
                                                  List<T> datas,
                                                  XSSFCellStyle dataCellStyle){
 
+        int startRowIndex = exportConfig.getStartRow();//2
+
+        int sheetIndex = exportConfig.getSheetIndex();//1
+
+        Class clazz = exportConfig.getDataClazz();
+
+        List<CellConfig> cellConfigs = exportConfig.getCellExportConfigList();
+
+        Sheet sheet = workbook.getSheetAt(sheetIndex);
+
+        int currentRowIndex = startRowIndex;
+
+        for(T data : datas){
+            Row currentRow = sheet.getRow(currentRowIndex);
+            if(ObjectUtils.isEmpty(currentRow)){
+                currentRow = sheet.createRow(currentRowIndex);
+            }
+
+            // insert data to row
+        }
     }
     private static <T> void insertFieldNameAsTitleToWorkbook(List<CellConfig> cellConfigs,
                                                              Sheet sheet,
