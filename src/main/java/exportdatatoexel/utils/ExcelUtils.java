@@ -12,6 +12,7 @@ import org.springframework.util.ObjectUtils;
 import org.springframework.util.ResourceUtils;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.lang.reflect.Field;
@@ -78,9 +79,20 @@ public class ExcelUtils {
 
         //insert fieldName as title to excel
         insertFieldNameAsTitleToWorkbook(ExportConfig.customerExport.getCellExportConfigList(), newSheet, tittleCellStyle);
+
         //insert data of fieldName to excel
+        insertDataToWorkbook(xssfWorkbook, ExportConfig.customerExport, customers, dataCellStyle);
 
         //return
+
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        xssfWorkbook.write(outputStream);
+
+        //close resource
+        outputStream.close();
+        fileInputStream.close();
+
+        return new ByteArrayInputStream(outputStream.toByteArray());
     }
 
     private static <T> void insertDataToWorkbook(Workbook workbook,
